@@ -1,0 +1,19 @@
+body{
+    background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%); 
+    text-align: center;
+}
+
+.grid-container{
+    display: grid;
+    grid-gap: 10px;
+    background-color: gray;
+    width: 150px;
+    height: 150px;
+    margin: auto;
+    
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.grid-element{
+    background-color: rgb(54, 9, 9);
+}
