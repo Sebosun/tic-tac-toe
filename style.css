@@ -14,6 +14,10 @@ body{
     grid-template-columns: 1fr 1fr 1fr;
 }
 
+
+/* Make it so it centers itself */
 .grid-element{
     background-color: rgb(201, 192, 192);
+    font-size: 50px;
+    
 }
