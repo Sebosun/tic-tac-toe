@@ -4,16 +4,16 @@ body{
 }
 
 .grid-container{
+    border: solid 2px black;
     display: grid;
     grid-gap: 10px;
     background-color: gray;
-    width: 150px;
-    height: 150px;
+    width: 550px;
+    height: 550px;
     margin: auto;
-    
     grid-template-columns: 1fr 1fr 1fr;
 }
 
 .grid-element{
-    background-color: rgb(54, 9, 9);
+    background-color: rgb(201, 192, 192);
 }
