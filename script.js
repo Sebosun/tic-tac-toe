@@ -38,6 +38,7 @@ const game = (() => {
     };
     
 // checks for wins using a table of all possible winning conditions
+// TODO: CHECK IF THERE'S A DRAW!
     const checkWin = () => {
         let winningConditions = [[0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 4, 8], [6, 4, 2]]
         for (let item = 0; item < winningConditions.length; item++) {
@@ -52,6 +53,7 @@ const game = (() => {
                     alert(`Player ${playerTwo.name} has won!`)
                 }
             }
+
         }
     }
 
