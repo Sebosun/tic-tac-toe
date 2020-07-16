@@ -32,8 +32,28 @@ const game = (() => {
             container.appendChild(div);
         }
         gridElems = document.querySelectorAll('.grid-element');
+        
         changeGridValue();
+        
     };
+    
+// checks for wins using a table of all possible winning conditions
+    const checkWin = () => {
+        let winningConditions = [[0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 4, 8], [6, 4, 2]]
+        for (let item = 0; item < winningConditions.length; item++) {
+// checks which player turn it is
+            if (turnCounter % 2 == 0){
+                if (gameBoard[winningConditions[item][0]] == playerOne.marker && gameBoard[winningConditions[item][1]] == playerOne.marker && gameBoard[winningConditions[item][2]] == playerOne.marker){
+                    alert(`Player ${playerOne.name} has won!`)
+                }
+            }
+            else{
+                if (gameBoard[winningConditions[item][1]] == playerTwo.marker && gameBoard[winningConditions[item][1]] == playerTwo.marker && gameBoard[winningConditions[item][2]] == playerTwo.marker){
+                    alert(`Player ${playerTwo.name} has won!`)
+                }
+            }
+        }
+    }
 
     const changeGridValue = () => {
         gridElems.forEach((place) =>{
@@ -52,6 +72,7 @@ const game = (() => {
                         turnCounter += 1;
                     }
                 }
+                checkWin();
                 generateGrid(gameBoard);
             });
         });
@@ -92,8 +113,8 @@ const Player = (name, marker) =>{
     return {name, marker}
 }
 
-const playerOne = Player('one', 'X');
-const playerTwo = Player('two', 'O');
+const playerOne = Player('iks', 'X');
+const playerTwo = Player('kolko', 'O');
 
 game.generateGrid(gameBoard);
 
