@@ -1,4 +1,11 @@
 const container = document.createElement('div');
+const playerOneInput = document.getElementById('player-one');
+const playerTwoInput = document.getElementById('player-two');
+const submitButton = document.getElementById('submit');
+
+let playerOne;
+let playerTwo;
+
 let gridElems;
 
 container.classList.add('grid-container');
@@ -23,6 +30,10 @@ let gameBoard = {
 const game = (() => {
     let turnCounter = 0;
     const generateGrid = (board) => {
+        if (playerOne || playerTwo == null){
+            playerOne = Player(playerOneInput.value, 'X');
+            playerTwo = Player(playerTwoInput.value, 'O');
+        }
         container.innerHTML = ''; // removes the board so it can be regenerated
         for (let i = 0; i < 9; i++) {
             let div = document.createElement('div');
@@ -95,7 +106,6 @@ const game = (() => {
             });
         });
     };
-    // might not need to return those two afterall :thinking: - just initiate it here?
     return{
         generateGrid,
     };
@@ -106,9 +116,12 @@ const Player = (name, marker) =>{
     return {name, marker}
 }
 
-const playerOne = Player('iks', 'X');
-const playerTwo = Player('kolko', 'O');
 
 game.generateGrid(gameBoard);
+
+document.querySelector('.button').addEventListener('click', function(){
+    document.querySelector('.grid-container').style.opacity = '100';
+    document.querySelector('#form').style.display = 'none';
+  });
 
 console.log(gridElems);
