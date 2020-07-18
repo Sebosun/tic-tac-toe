@@ -3,6 +3,8 @@ const playerOneInput = document.getElementById('player-one');
 const playerTwoInput = document.getElementById('player-two');
 const submitButton = document.getElementById('submit');
 
+let turnCounter = 0;
+
 let playerOne;
 let playerTwo;
 
@@ -25,10 +27,12 @@ let gameBoard = {
     8: '',
 }
 
-// generate module for my single use stuff
+const Player = (name, marker) =>{
+    return {name, marker}
+}
 
+// generate module for my single use stuff
 const game = (() => {
-    let turnCounter = 0;
     const generateGrid = (board) => {
         if (playerOne || playerTwo == null){
             playerOne = Player(playerOneInput.value, 'X');
@@ -54,26 +58,24 @@ const game = (() => {
     };
     
 // checks for wins using a table of all possible winning conditions
-// TODO: C3HECK IF THERE'S A DRAW!
     const checkWin = (board) => {
         let winningConditions = [[0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 4, 8], [6, 4, 2]]
         if (turnCounter === 9){
             return 'Draw!'
-        }
-        
-// checks which player turn it is
-// a bug occured here, turn was being checked on the opposite player's turn. 
-// so instead of checking for win when O was making a move, i was checking it before X could place his stuff
+        }   
+        // checks which player turn it is
+        // a bug occured here, turn was being checked on the opposite player's turn. 
+        // so instead of checking for win when O was making a move, i was checking it before X could place his stuff
         else{
             for (let item = 0; item < winningConditions.length; item++) {
                 if (turnCounter % 2 == 1){
                     if (board[winningConditions[item][0]] == playerOne.marker && board[winningConditions[item][1]] == playerOne.marker && board[winningConditions[item][2]] == playerOne.marker){
-                        return (`Player ${playerOne.name} has won!`)
+                        return (`${playerOne.name} has won!`)
                     }
                 }
                 else{
                     if (board[winningConditions[item][0]] == playerTwo.marker && board[winningConditions[item][1]] == playerTwo.marker && board[winningConditions[item][2]] == playerTwo.marker){
-                        return (`Player ${playerTwo.name} has won!`)
+                        return (`${playerTwo.name} has won!`)
                     }
                 }
             }
@@ -108,20 +110,28 @@ const game = (() => {
     };
     return{
         generateGrid,
+        turnCounter,
     };
 })();
 
 // player Factory Function
-const Player = (name, marker) =>{
-    return {name, marker}
-}
 
 
-game.generateGrid(gameBoard);
-
-document.querySelector('.button').addEventListener('click', function(){
+document.querySelector('#submit-button').addEventListener('click', function(){
+    document.querySelector('#reset').style.display = 'inline';
     document.querySelector('.grid-container').style.opacity = '100';
     document.querySelector('#form').style.display = 'none';
   });
+
+game.generateGrid(gameBoard);
+
+document.querySelector('#reset').addEventListener('click', () => {
+    for (let i = 0; i < 9; i++){
+        gameBoard[i] = '';
+    }
+    turnCounter = 0;
+    game.generateGrid(gameBoard);
+    
+});
 
 console.log(gridElems);
