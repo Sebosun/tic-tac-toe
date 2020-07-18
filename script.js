@@ -33,8 +33,12 @@ const game = (() => {
         }
 
         gridElems = document.querySelectorAll('.grid-element');
-        checkWin(board);
-        changeGridValue();
+        if (checkWin(board) == 'continue'){
+            changeGridValue();
+        }
+        else{
+            alert(checkWin(board));
+        }
         
     };
     
@@ -42,21 +46,30 @@ const game = (() => {
 // TODO: C3HECK IF THERE'S A DRAW!
     const checkWin = (board) => {
         let winningConditions = [[0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 4, 8], [6, 4, 2]]
-        for (let item = 0; item < winningConditions.length; item++) {
+        if (turnCounter === 9){
+            alert(`It's a DRAW!`)
+            return 'Draw!'
+        }
+        
 // checks which player turn it is
 // a bug occured here, turn was being checked on the opposite player's turn. 
 // so instead of checking for win when O was making a move, i was checking it before X could place his stuff
-            if (turnCounter % 2 == 1){
-                if (board[winningConditions[item][0]] == playerOne.marker && board[winningConditions[item][1]] == playerOne.marker && board[winningConditions[item][2]] == playerOne.marker){
-                    alert(`Player ${playerOne.name} has won!`)
+        else{
+            for (let item = 0; item < winningConditions.length; item++) {
+                if (turnCounter % 2 == 1){
+                    if (board[winningConditions[item][0]] == playerOne.marker && board[winningConditions[item][1]] == playerOne.marker && board[winningConditions[item][2]] == playerOne.marker){
+                        return (`Player ${playerOne.name} has won!`)
+                    }
+                }
+                else{
+                    if (board[winningConditions[item][0]] == playerTwo.marker && board[winningConditions[item][1]] == playerTwo.marker && board[winningConditions[item][2]] == playerTwo.marker){
+                        return (`Player ${playerOne.name} has won!`)
+                    }
                 }
             }
-            else{
-                if (board[winningConditions[item][0]] == playerTwo.marker && board[winningConditions[item][1]] == playerTwo.marker && board[winningConditions[item][2]] == playerTwo.marker){
-                    alert(`Player ${playerTwo.name} has won!`)
-                }
-            }
-
+            console.log('continue');
+            return 'continue'
+            
         }
     }
 
