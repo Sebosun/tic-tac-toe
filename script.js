@@ -31,25 +31,28 @@ const game = (() => {
             div.textContent = board[i]
             container.appendChild(div);
         }
+
         gridElems = document.querySelectorAll('.grid-element');
-        
+        checkWin(board);
         changeGridValue();
         
     };
     
 // checks for wins using a table of all possible winning conditions
-// TODO: CHECK IF THERE'S A DRAW!
-    const checkWin = () => {
+// TODO: C3HECK IF THERE'S A DRAW!
+    const checkWin = (board) => {
         let winningConditions = [[0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 4, 8], [6, 4, 2]]
         for (let item = 0; item < winningConditions.length; item++) {
 // checks which player turn it is
-            if (turnCounter % 2 == 0){
-                if (gameBoard[winningConditions[item][0]] == playerOne.marker && gameBoard[winningConditions[item][1]] == playerOne.marker && gameBoard[winningConditions[item][2]] == playerOne.marker){
+// a bug occured here, turn was being checked on the opposite player's turn. 
+// so instead of checking for win when O was making a move, i was checking it before X could place his stuff
+            if (turnCounter % 2 == 1){
+                if (board[winningConditions[item][0]] == playerOne.marker && board[winningConditions[item][1]] == playerOne.marker && board[winningConditions[item][2]] == playerOne.marker){
                     alert(`Player ${playerOne.name} has won!`)
                 }
             }
             else{
-                if (gameBoard[winningConditions[item][1]] == playerTwo.marker && gameBoard[winningConditions[item][1]] == playerTwo.marker && gameBoard[winningConditions[item][2]] == playerTwo.marker){
+                if (board[winningConditions[item][0]] == playerTwo.marker && board[winningConditions[item][1]] == playerTwo.marker && board[winningConditions[item][2]] == playerTwo.marker){
                     alert(`Player ${playerTwo.name} has won!`)
                 }
             }
@@ -68,13 +71,14 @@ const game = (() => {
                     if (turnCounter % 2 == 0){          //if even player one | odds player two
                         gameBoard[e.target.id] = playerOne.marker; 
                         turnCounter += 1;
+
                     }
                     else{
                         gameBoard[e.target.id] = playerTwo.marker;
                         turnCounter += 1;
+
                     }
                 }
-                checkWin();
                 generateGrid(gameBoard);
             });
         });
