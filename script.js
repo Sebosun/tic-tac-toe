@@ -47,7 +47,6 @@ const game = (() => {
     const checkWin = (board) => {
         let winningConditions = [[0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 4, 8], [6, 4, 2]]
         if (turnCounter === 9){
-            alert(`It's a DRAW!`)
             return 'Draw!'
         }
         
@@ -63,7 +62,7 @@ const game = (() => {
                 }
                 else{
                     if (board[winningConditions[item][0]] == playerTwo.marker && board[winningConditions[item][1]] == playerTwo.marker && board[winningConditions[item][2]] == playerTwo.marker){
-                        return (`Player ${playerOne.name} has won!`)
+                        return (`Player ${playerTwo.name} has won!`)
                     }
                 }
             }
@@ -101,31 +100,6 @@ const game = (() => {
         generateGrid,
     };
 })();
-
-
-// generates the grid with the board object provided
-// let generateGrid = (board) => {
-//     container.innerHTML = ''; // removes the board so it can be regenerated
-//     for (let i = 0; i < 9; i++) {
-//         let div = document.createElement('div');
-//         div.classList.add('grid-element');
-//         div.setAttribute('id', i);
-//         div.textContent = board[i]
-//         container.appendChild(div);
-//     }    
-//     // query Selector which will be used lateron for a listener
-//     gridElems = document.querySelectorAll('.grid-element');
-// }
-
-
-// function changeGridValue(){
-//     gridElems.forEach((place) =>{
-//         place.addEventListener('click', (e) => {
-//             console.log(e.target.id);
-            
-//         });
-//     })
-// }
 
 // player Factory Function
 const Player = (name, marker) =>{
