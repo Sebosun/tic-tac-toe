@@ -4,6 +4,31 @@ body{
     
 }
 
+.grid-container{
+    font-size: 2rem;
+    border: solid 2px black;
+    display: grid;
+    background-color: gray;
+    width: 600px;
+    height: 600px;
+    margin: auto;
+    grid-template-columns: 1fr 1fr 1fr; 
+    transition: all 1s linear;
+    opacity: 0;
+}
+
+.grid-element{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: aliceblue;
+    font-size: 2em;
+    max-width: 100%;
+    max-height: 100%;
+    border: 2px solid black;
+}
+
+
 #reset{
     position: absolute;
     top: 10px;
@@ -18,27 +43,7 @@ body{
     text-align: center;
 }
 
-.grid-container{
-    font-size: 2rem;
-    border: solid 2px black;
-    display: grid;
-    grid-gap: 10px;
-    background-color: gray;
-    width: 600px;
-    height: 600px;
-    margin: auto;
-    grid-template-columns: 1fr 1fr 1fr; 
-    /* display: none; */
-    transition: all 2s linear;
-    opacity: 0;
-}
-
-.grid-element{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: aliceblue;
-    font-size: 1em;
-    max-width: 100%;
-    max-height: 100%;
+.input-field{
+    width: 150px;
+    height: 20px;
 }

@@ -2,6 +2,7 @@ const container = document.createElement('div');
 const playerOneInput = document.getElementById('player-one');
 const playerTwoInput = document.getElementById('player-two');
 const submitButton = document.getElementById('submit');
+const h1Header = document.getElementById('title');
 
 let turnCounter = 0;
 
@@ -52,7 +53,7 @@ const game = (() => {
             changeGridValue();
         }
         else{
-            alert(checkWin(board));
+            h1Header.textContent = checkWin(board);
         }
         
     };
@@ -118,6 +119,7 @@ const game = (() => {
 
 
 document.querySelector('#submit-button').addEventListener('click', function(){
+    
     document.querySelector('#reset').style.display = 'inline';
     document.querySelector('.grid-container').style.opacity = '100';
     document.querySelector('#form').style.display = 'none';
@@ -126,6 +128,7 @@ document.querySelector('#submit-button').addEventListener('click', function(){
 game.generateGrid(gameBoard);
 
 document.querySelector('#reset').addEventListener('click', () => {
+    h1Header.textContent = 'Tic Tac Toe';
     for (let i = 0; i < 9; i++){
         gameBoard[i] = '';
     }
